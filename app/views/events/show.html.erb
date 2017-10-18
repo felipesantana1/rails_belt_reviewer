@@ -1,0 +1,46 @@
+<br>
+<a href="/events">Events Homepage</a>
+<div class="event">
+<h1><%=@event.name%></h1>
+<p>Host: <%= @event.user.name %></p>
+<p>Date: <%= @event.date.strftime("%B %d, %Y") %></p>
+<p>Location: <%= @event.location %>, <%= @event.state%></p>
+<p>People who are joining this event: <%= @event.joins.count %></p>
+    <table class="table">
+        <tr class="tr">
+            <th class="th">Name</th>
+            <th class="th">Location</th>
+            <th class="th">State</th>
+        </tr>
+        <% @joins.each do |join| %>
+        <tr>
+            <td class="td"><%= join.user.name %></td>
+            <td class="td"><%= join.user.location  %></td>
+            <td class="td"><%= join.user.state %></td>
+        </tr>
+        <% end %>
+    </table>
+</div>
+
+<div class="event">
+    <h4>Discussion about this event</h4>
+    <textarea class="msgs">
+    <% @messages.each do |msg| %>
+         <%= msg.user.username %> says: <%= msg.content %>
+    <% end %>
+    </textarea>
+    <br>
+    <b>Add Comment</b>
+    <form action="/events/<%=@event.id%>/message" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <textarea class="msg" name="message"></textarea>
+        <input type="submit" value="Submit Comment">
+    </form>
+    <ul>
+    <% if flash[:errors] %>
+        <% flash[:errors].each do |error| %>
+            <li><b><%=error%></b></li>
+        <% end %>
+    <% end %>
+    </ul>
+</div>

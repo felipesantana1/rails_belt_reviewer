@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BeltReview</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+<style>
+  fieldset {
+    width: 40%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .table {
+    border-collapse: collapse;
+  }
+
+  .table, .th, .td {
+    border: 1px solid black;
+  }
+  .msgs {
+    width: 400px;
+    height: 200px;
+  }
+  .msg {
+    width: 250px;
+  }
+  .event {
+    width: 40%;
+    display: inline-block;
+    vertical-align: top;
+  }
+</style>
+
+</head>
+<body>
+
+<% if current_user %>
+<a href="/user/logout" data-method="post">Log Out</a>
+<%end%>
+
+<%= yield %>
+
+</body>
+</html>
